@@ -25,6 +25,11 @@ D2Entity OtherEntity = D2Entity(2);
 D2Entity OtherEntity2 = D2Entity(3);
 D2Entity OtherEntity3 = D2Entity(4);
 
+//textures needed for the game
+GLuint mapTextures;
+GLuint reticleTexture;
+GLuint emenyTexture;
+
 //verticies needed for 4k
 float RayRenderer::Vertices[15360];
 float FaceInformation[15360];
@@ -66,27 +71,41 @@ unsigned int MapTexture;
 
 Shader* ourShader;
 Shader* characterShader;
+Shader* reticleShader;
 
 void RayRenderer::DrawLines() {
 
-
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, mapTextures);
+    ourShader->setInt("textureSampler", 0); // The sampler2D uniform in the shader
     
     ourShader->use();
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * Width * 4, Vertices, GL_STATIC_DRAW);
 	glDrawArrays(GL_LINES, 0, Width * 2);
 
-    DrawEntities();
-    DrawHud();
-    
-    ourShader->use();
-    glUniform1i(glGetUniformLocation(ourShader->ID, "MapTextures"),2);
-    glActiveTexture(GL_TEXTURE0 + 2);
-    glBindTexture(GL_TEXTURE_2D, MapTexture);
-
-    // color attribute
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);
+
+
+    //swap to redicle texture
+    ourShader->setInt("textureSampler", 0); // The sampler2D uniform in the shader
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, emenyTexture);
+    DrawEntities();
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, reticleTexture);
+
+    DrawHud();
+
+    
+
+
+
+    // color attribute
+
 
     
 }
@@ -110,7 +129,7 @@ void RayRenderer::DrawEntities() {
         float* verts = new float[12];
         temp->data->CalcVertices(verts);
 
-        float a = Entity.AngleToPlayer();
+        float a = temp->data->AngleToPlayer();
 
         characterShader->use();
 
@@ -132,25 +151,24 @@ void RayRenderer::DrawEntities() {
 
 
 void RayRenderer::DrawHud() {
+    reticleShader->use();
     float* verts = new float[12];
     for (int i = 0; i < 12; i++) {
         verts[i] = 0.05f * i;
     }
 
-    verts[0] = -0.5;
-    verts[1] = 0.5;
-    verts[2] = -0.5;
-    verts[3] = -0.5;
-    verts[4] = 0.5;
-    verts[5] = -0.5;
-    verts[6] = 0.5;
-    verts[7] = 0.5;
-    verts[8] = -0.5;
-    verts[9] = 0.5;
-    verts[10] = 0.5;
-    verts[11] = -0.5;
-    characterShader->setFloat("AnglePlayer", 0);
-    characterShader->setFloat("DistPlayer", 0);
+    verts[0] = -0.2;
+    verts[1] = 0.2;
+    verts[2] = -0.2;
+    verts[3] = -0.2;
+    verts[4] = 0.2;
+    verts[5] = -0.2;
+    verts[6] = 0.2;
+    verts[7] = 0.2;
+    verts[8] = -0.2;
+    verts[9] = 0.2;
+    verts[10] = 0.2;
+    verts[11] = -0.2;
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, verts, GL_STATIC_DRAW);
     glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -171,37 +189,6 @@ string GetWD() {
     return buffer;
 }
 
-void LoadTextures() {
-    
-    // texture 1
-    // ---------
-    glGenTextures(1, &MapTexture);
-    glBindTexture(GL_TEXTURE_2D, MapTexture);
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
-    int width, height, nrChannels;
-    //stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-    // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-    unsigned char* data = stbi_load((GetWD() + "\\textures\\MapAtlas.jpg").c_str(), &width, &height, &nrChannels, 0);
-    if (data)
-    {
-        //cout << data;
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        cout << "loaded texture" << endl;
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
-}
-
 // Function to load a texture
 GLuint loadTexture(const char* filePath) {
     GLuint textureID;
@@ -218,7 +205,8 @@ GLuint loadTexture(const char* filePath) {
     int width, height, nrChannels;
     unsigned char* data = stbi_load(filePath, &width, &height, &nrChannels, 0);
     if (data) {
-        GLenum format = (nrChannels == 3) ? GL_RGB : GL_RGBA;
+        GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
@@ -230,17 +218,20 @@ GLuint loadTexture(const char* filePath) {
 }
 
 // Load two textures
-//GLuint texture1 = loadTexture((GetWD() + "\\textures\\MapAtlas.jpg").c_str());
+
 //GLuint texture2 = loadTexture((GetWD() + "\\textures\\MapAtlas.jpg").c_str());
 
 
 
 void RayRenderer::Init() {
+
     //create shaders
 	ourShader = new Shader("./vs.shader", "./fs.shader", "abc");
     ourShader->GenBuff(1);
     characterShader = new Shader("./charactervertex.shader", "./charactershader.shader", "chr");
     characterShader->GenBuff(0);
+    reticleShader = new Shader("./reticlevertex.shader", "./reticleshader.shader", "chr");
+    reticleShader->GenBuff(2);
 	unsigned int VBO;
 
 
@@ -257,8 +248,10 @@ void RayRenderer::Init() {
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-
-    LoadTextures();
+    mapTextures = loadTexture((GetWD() + "\\textures\\MapAtlas.jpg").c_str());
+    reticleTexture = loadTexture((GetWD() + "\\textures\\croshair.png").c_str());
+    emenyTexture = loadTexture((GetWD() + "\\textures\\enemy.png").c_str());
+    //LoadTextures();
 
 
     

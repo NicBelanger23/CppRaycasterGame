@@ -109,5 +109,11 @@
     <None Include="vs.shader">
       <Filter>Source Files\Rendering\Shaders</Filter>
     </None>
+    <None Include="reticleshader.shader">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </None>
+    <None Include="reticlevertex.shader">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
