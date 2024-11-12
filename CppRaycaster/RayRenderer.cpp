@@ -10,7 +10,7 @@
 #include "stb_image.h"
 #include <filesystem>
 #include <direct.h> 
-#include "D2Entity.h"
+#include "D2entity.h"
 #include "LinkedList.h"
 
 using namespace std;
@@ -20,15 +20,12 @@ int RayRenderer::Height = 10;
 
 //usefull objects
 NicRay ray = NicRay();
-D2Entity Entity = D2Entity(1);
-D2Entity OtherEntity = D2Entity(2);
-D2Entity OtherEntity2 = D2Entity(3);
-D2Entity OtherEntity3 = D2Entity(4);
 
 //textures needed for the game
 GLuint mapTextures;
 GLuint reticleTexture;
 GLuint emenyTexture;
+GLuint gunTexture;
 
 //verticies needed for 4k
 float RayRenderer::Vertices[15360];
@@ -40,7 +37,7 @@ void RayRenderer::SendRayToGPU(int index, float posx, float dist) {
     while (colloffset > 1) {
         colloffset -= 1;
     }
-    FaceInformation[index * 4] = ray.faceDirection;
+    FaceInformation[index * 4] = (float)ray.faceDirection;
     FaceInformation[(index * 4) + 1] = dist;
     FaceInformation[(index * 4) + 2] = colloffset;
     FaceInformation[(index * 4) + 3] = float(ray.foundMaterial) - 1;
@@ -72,6 +69,8 @@ unsigned int MapTexture;
 Shader* ourShader;
 Shader* characterShader;
 Shader* reticleShader;
+Shader* healthBarShader;
+Shader* gunShader;
 
 void RayRenderer::DrawLines() {
 
@@ -116,7 +115,7 @@ void RayRenderer::DrawEntities() {
     LinkedList sortedentitys = LinkedList();
 
     for (auto it = GameManager::entityMap.begin(); it != GameManager::entityMap.end(); ++it) {
-        D2Entity* entity = *it; // Dereference the iterator to get the entity pointer
+        D2entity* entity = *it; // Dereference the iterator to get the entity pointer
         if (entity) { // Check if the pointer is not null
 
             sortedentitys.insertSorted(entity);
@@ -129,12 +128,12 @@ void RayRenderer::DrawEntities() {
         float* verts = new float[12];
         temp->data->CalcVertices(verts);
 
-        float a = temp->data->AngleToPlayer();
+        float a = temp->data->AnglePlayer;
 
         characterShader->use();
 
         characterShader->setFloat("AnglePlayer", a);
-        characterShader->setFloat("DistPlayer", temp->data->DistFromPlayer());
+        characterShader->setFloat("DistPlayer", temp->data->DistanceFromPlayer);
 
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, verts, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -151,31 +150,92 @@ void RayRenderer::DrawEntities() {
 
 
 void RayRenderer::DrawHud() {
+
+    //drawoing reticle
+    float aspect = (float)Width / (float)Height;
     reticleShader->use();
-    float* verts = new float[12];
-    for (int i = 0; i < 12; i++) {
-        verts[i] = 0.05f * i;
+    reticleShader->setFloat("Aspect", aspect);
+    float* reticleverts = new float[12];
+
+    reticleverts[0] = -0.2f;
+    reticleverts[1] = 0.2f * aspect;
+    reticleverts[2] = -0.2f;
+    reticleverts[3] = -0.2f * aspect;
+    reticleverts[4] = 0.2f;
+    reticleverts[5] = -0.2f * aspect;
+    reticleverts[6] = 0.2f;
+    reticleverts[7] = 0.2f * aspect;
+    reticleverts[8] = -0.2f;
+    reticleverts[9] = 0.2f * aspect;
+    reticleverts[10] = 0.2f;
+    reticleverts[11] = -0.2f * aspect;
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, reticleverts, GL_STATIC_DRAW);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    delete[] reticleverts;
+
+    //drawing health bar
+    healthBarShader->use();
+    healthBarShader->setFloat("Health", Player::localPlayer.GetHealth()/100.0);
+    healthBarShader->setFloat("Ammo", Player::localPlayer.currentWeapon->AmmoPercentage());
+    float* healthverts = new float[12];
+
+    healthverts[0] = -1.0f;
+    healthverts[1] = 0.2f;
+    healthverts[2] = -1.0f;
+    healthverts[3] = -1.0f;
+    healthverts[4] = -0.8f;
+    healthverts[5] = -1.0f;
+    healthverts[6] = -0.8f;
+    healthverts[7] = 0.2f;
+    healthverts[8] = -1.0f;
+    healthverts[9] = 0.2f;
+    healthverts[10] = -0.8f;
+    healthverts[11] = -1.0f;
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, healthverts, GL_STATIC_DRAW);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    delete[] healthverts;
+
+    //draw weapon
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, gunTexture);
+
+    gunShader->use();
+    if (Player::localPlayer.currentWeapon->isReloading) {
+        gunShader->setInt("State", 2);
+    }
+    else if (Player::localPlayer.currentWeapon->drawFiring) {
+        gunShader->setInt("State", 1);
+    }
+    else {
+        gunShader->setInt("State", 0);
     }
 
-    verts[0] = -0.2;
-    verts[1] = 0.2;
-    verts[2] = -0.2;
-    verts[3] = -0.2;
-    verts[4] = 0.2;
-    verts[5] = -0.2;
-    verts[6] = 0.2;
-    verts[7] = 0.2;
-    verts[8] = -0.2;
-    verts[9] = 0.2;
-    verts[10] = 0.2;
-    verts[11] = -0.2;
+    float* gunverts = new float[12];
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, verts, GL_STATIC_DRAW);
+    gunverts[0] = -1.0f;
+    gunverts[1] = 1.0f;
+    gunverts[2] = -1.0f;
+    gunverts[3] = -1.0f;
+    gunverts[4] = 1.0f;
+    gunverts[5] = -1.0f;
+    gunverts[6] = -1.0f;
+    gunverts[7] = 1.0f;
+    gunverts[8] = 1.0f;
+    gunverts[9] = 1.0f;
+    gunverts[10] = 1.0f;
+    gunverts[11] = -1.0f;
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, gunverts, GL_STATIC_DRAW);
     glDrawArrays(GL_TRIANGLES, 0, 6);
+    delete[] gunverts;
 
-
-    delete[] verts;
 }
+
+
+
+
 
 void RayRenderer::ShaderTick() {
 	ourShader -> passAdditionalInfo(FaceInformation, Width * 4);
@@ -228,10 +288,14 @@ void RayRenderer::Init() {
     //create shaders
 	ourShader = new Shader("./vs.shader", "./fs.shader", "abc");
     ourShader->GenBuff(1);
-    characterShader = new Shader("./charactervertex.shader", "./charactershader.shader", "chr");
+    characterShader = new Shader("./charactervertex.shader", "./charactershader.shader", "def");
     characterShader->GenBuff(0);
-    reticleShader = new Shader("./reticlevertex.shader", "./reticleshader.shader", "chr");
+    reticleShader = new Shader("./reticlevertex.shader", "./reticleshader.shader", "ghi");
     reticleShader->GenBuff(2);
+    healthBarShader = new Shader("./charactervertex.shader", "./healthbar.shader", "jkl");
+    reticleShader->GenBuff(3);
+    gunShader = new Shader("./charactervertex.shader", "./weapon.shader", "mno");
+    gunShader->GenBuff(4);
 	unsigned int VBO;
 
 
@@ -251,6 +315,7 @@ void RayRenderer::Init() {
     mapTextures = loadTexture((GetWD() + "\\textures\\MapAtlas.jpg").c_str());
     reticleTexture = loadTexture((GetWD() + "\\textures\\croshair.png").c_str());
     emenyTexture = loadTexture((GetWD() + "\\textures\\enemy.png").c_str());
+    gunTexture = loadTexture((GetWD() + "\\textures\\GunStates.png").c_str());
     //LoadTextures();
 
 

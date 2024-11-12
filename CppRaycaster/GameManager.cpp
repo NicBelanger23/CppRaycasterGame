@@ -6,7 +6,10 @@
 #include <iostream>
 #include <gl/GL.h>
 #include "RayRenderer.h"
-#include "D2Entity.h"
+#include "D2entity.h"
+#include "Map.h"
+#include "./statemachine/soldier.h"
+#include "./statemachine/statevals.h"
 
 #pragma once
 using namespace std;
@@ -15,7 +18,7 @@ double GameManager::clockToMilliseconds(clock_t ticks) {
     return (ticks / (double)CLOCKS_PER_SEC);
 }
 
-std::set<D2Entity*> GameManager::entityMap;
+std::set<D2entity*> GameManager::entityMap;
 
 GLFWwindow* window;
 
@@ -26,14 +29,18 @@ clock_t currentFrame = clock();
 clock_t deltaTime = 0;
 unsigned int frames = 0;
 
+statevals* statevals::Instance = new statevals();
 
 void GameManager::beginGame(GLFWwindow* win) {
     window = win;
     RayRenderer::Init();
 
+    Map::loadLevelOne();
+
     Player p = Player();
     p.init();
     Player::localPlayer = p;
+
 }
 
 
@@ -46,7 +53,7 @@ float g_vertex_buffer_data[] = {
 
 void UpdateEntities(float deltaTime) {
     for (auto it = GameManager::entityMap.begin(); it != GameManager::entityMap.end(); ++it) {
-        D2Entity* entity = *it; // Dereference the iterator to get the entity pointer
+        D2entity* entity = *it; // Dereference the iterator to get the entity pointer
         if (entity) { // Check if the pointer is not null
             entity->Update(deltaTime); // Call the function on each entity
         }
@@ -79,7 +86,7 @@ void GameManager::Update() {
     }
 
     //draw frame
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     RayRenderer::DrawLines();
 

@@ -6,17 +6,17 @@
 #include <gl/GL.h>
 #include "RayRenderer.h"
 #include <set>
-#include "D2Entity.h"
+#include "D2entity.h"
 
 #pragma once
 using namespace std;
 class GameManager
 {
-    friend class D2Entity;
+    friend class D2entity;
 
     public: void beginGame(GLFWwindow* win);
             void Update();
-            static set<D2Entity*> entityMap;
+            static set<D2entity*> entityMap;
             
     private:
         double clockToMilliseconds(clock_t t);

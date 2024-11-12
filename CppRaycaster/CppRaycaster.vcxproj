@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="D2Entity.h" />
+    <ClInclude Include="D2entity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedNode.h" />
@@ -147,30 +147,59 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="NicRay.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerWeapon.h" />
     <ClInclude Include="RayRenderer.h" />
-    <ClInclude Include="SimpleAI.h" />
+    <ClInclude Include="statemachine\farDistShootState.h" />
+    <ClInclude Include="statemachine\healingState.h" />
+    <ClInclude Include="statemachine\meleeState.h" />
+    <ClInclude Include="statemachine\patrollState.h" />
+    <ClInclude Include="statemachine\prefDistShootState.h" />
+    <ClInclude Include="statemachine\reloadState.h" />
+    <ClInclude Include="statemachine\retreatState.h" />
+    <ClInclude Include="statemachine\soldier.h" />
+    <ClInclude Include="statemachine\state.h" />
+    <ClInclude Include="statemachine\stateExit.h" />
+    <ClInclude Include="statemachine\stateMachine.h" />
+    <ClInclude Include="statemachine\statevals.h" />
+    <ClInclude Include="statemachine\valCollection.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="textureshader.h" />
+    <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D2Entity.cpp" />
+    <ClCompile Include="D2entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="NicRay.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerWeapon.cpp" />
     <ClCompile Include="RayRenderer.cpp" />
-    <ClCompile Include="SimpleAI.cpp" />
+    <ClCompile Include="statemachine\farDistShootState.cpp" />
+    <ClCompile Include="statemachine\healingState.cpp" />
+    <ClCompile Include="statemachine\meleeState.cpp" />
+    <ClCompile Include="statemachine\patrollState.cpp" />
+    <ClCompile Include="statemachine\prefDistShootState.cpp" />
+    <ClCompile Include="statemachine\reloadState.cpp" />
+    <ClCompile Include="statemachine\retreatState.cpp" />
+    <ClCompile Include="statemachine\soldier.cpp" />
+    <ClCompile Include="statemachine\state.cpp" />
+    <ClCompile Include="statemachine\stateExit.cpp" />
+    <ClCompile Include="statemachine\statevals.cpp" />
+    <ClCompile Include="statemachine\valCollection.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="charactershader.shader" />
     <None Include="fs.shader" />
     <None Include="charactervertex.shader" />
+    <None Include="healthbar.shader" />
     <None Include="reticleshader.shader" />
     <None Include="reticlevertex.shader" />
     <None Include="vs.shader" />
+    <None Include="weapon.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

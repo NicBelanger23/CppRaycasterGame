@@ -16,24 +16,28 @@ uniform float DistPlayer;
 
 void main()
 {
-
-	float x = (TexCoord.x + AnglePlayer * 2) * DistPlayer;
+	float angle = AnglePlayer;
+	float x = (TexCoord.x + angle * 2) * DistPlayer;
 	float y = TexCoord.y * DistPlayer;
 
 	int calcIndex = int((gl_FragCoord.x)) * 4;
 
 	//float multiplier = floatArray.data[calcIndex] / 4;
-	float dist = floatArray.data[calcIndex + 1]; 
-
+	float dist = floatArray.data[calcIndex + 1];
+	if (angle < 0) { angle += 2 * 3.14f; }
+    if (angle > 2 * 3.14) { angle -= 2 * 3.14f; } 
+	dist /= cos(angle);
 
 	//that last 0.9 fixes white lines on edge of blocks
    	vec2 newv = vec2(x + 0.5, -y / 1.4 + 0.3);
-	   
+	 
 	if( dist > DistPlayer){
 		vec4 c = texture(textureSampler, newv);
+
 		if(c.w < 1){discard;}
-		FragColor = c / DistPlayer;
-			//FragColor = vec4(1/DistPlayer,0.2,0.2,1);
+		if(DistPlayer < 2){FragColor = c;}
+		else{FragColor = c / (DistPlayer * 0.5);}
+
 	}
 	else{
 		discard;

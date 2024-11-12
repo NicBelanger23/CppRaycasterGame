@@ -1,3 +1,4 @@
+#include "vector2.h"
 #pragma once
 class NicRay
 {
@@ -8,7 +9,7 @@ class NicRay
         float Angle;
         float M;
         float B;
-        float rayVector[3];
+        vector2 rayVector;
 
 
         float xhyp = 0;
@@ -21,14 +22,15 @@ class NicRay
         float Foundy = 0.1f;
         float foundx;
 
-        void StepX(float playerPos[3]);
-        void SetpY(float playerPos[3]);
+        void StepX(vector2 playerPos);
+        void SetpY(vector2 playerPos);
 
         void FaceX();
         void FaceY();
 
     public:
-        float CalculateLineEquation(float playerPos[3], float myangle, int depth);
+        float CalculateLineEquation(vector2 start, float myangle, int depth);
+        float CalculateLineEquation(vector2 start, vector2 direction, int depth);
         int faceDirection;
         float collOffset;
         int foundMaterial;

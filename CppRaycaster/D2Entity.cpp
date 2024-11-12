@@ -1,34 +1,37 @@
-#include "D2Entity.h"
+#include "D2entity.h"
 #include "Player.h"
 #include <cmath>
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
-#include "SimpleAI.h"
 #include "GameManager.h"
+#include "vector2.h"
+#include "NicRay.h"
 #include <iostream>
 #include <set>
+#include "./statemachine/stateMachine.h"
 
 #pragma once
 using namespace std;
 
-D2Entity::D2Entity(int id) {
+NicRay collisionRay = NicRay();
+
+D2entity::D2entity(int id, vector2 position) {
 	DistanceFromPlayer = 99999;
 	ID = id;
-	Position[0] = 1.5;
-	Position[1] = 2.9f;
+	Position = position;
 
-	Verticies[0][0] = -0.4;
+	Verticies[0][0] = -0.4f;
 	Verticies[0][1] = 0;
 
-	Verticies[1][0] = -0.4;
-	Verticies[1][1] = 1.4;
+	Verticies[1][0] = -0.4f;
+	Verticies[1][1] = 1.4f;
 
-	Verticies[2][0] = 0.4;
+	Verticies[2][0] = 0.4f;
 	Verticies[2][1] = 0;
 
-	Verticies[3][0] = 0.4;
-	Verticies[3][1] = 1.4;
+	Verticies[3][0] = 0.4f;
+	Verticies[3][1] = 1.4f;
 
 	Indicies[0] = 0;
 	Indicies[1] = 1;
@@ -37,33 +40,17 @@ D2Entity::D2Entity(int id) {
 	Indicies[4] = 2;
 	Indicies[5] = 3;
 
+	AnglePlayer = 180;
 	GameManager::entityMap.insert(this);
-
-	AI = new SimpleAI(this);
-
-
 }
 
-
-float D2Entity::calculateHpy(float a, float b) {
-	return powf((a * a) + (b * b), 0.5f);
+D2entity::~D2entity() {
+	cout << "Deleteing entity";
+	GameManager::entityMap.erase(this);
+	delete myMachine;
 }
 
-float dot(float v1[], float v2[]) {
-	return v1[0] * v2[0] + v1[1] * v2[1];
-}
-
-float cross(float v1[], float v2[]) {
-	return v1[0] * v2[1] - v1[1] * v2[0];
-}
-
-float signedAngle(float v1[], float v2[]) {
-	// atan2(sinTheta, cosTheta)
-	float angle = atan2(cross(v1, v2), dot(v1, v2));
-	return angle; // Angle is in radians
-}
-
-void D2Entity::CalcVertices(float* list) {
+void D2entity::CalcVertices(float* list) {
 	float pos = -AngleToPlayer() * 2;
 	float dist = DistFromPlayer();
 	if (dist <= 0) {
@@ -76,42 +63,83 @@ void D2Entity::CalcVertices(float* list) {
 	}
 }
 
-float D2Entity::AngleToPlayer() {
-	float px = Player::localPlayer.forwardVector[0];
-	float py = Player::localPlayer.forwardVector[1];
-
-	float dx = Position[0] - Player::localPlayer.position[0];
-	float dy = Position[1] - Player::localPlayer.position[1];;
-
-	float* newarry = new float[2];
-	newarry[0] = dx;
-	newarry[1] = dy;
-	//std::cout << dx << " " << dy << std::endl;
-
-	float a = signedAngle(Player::localPlayer.forwardVector, newarry);
-
-	delete[] newarry;
-	return a;
+float D2entity::AngleToPlayer() {
+	vector2 d = Position - Player::localPlayer.position;
+	AnglePlayer = Player::localPlayer.forwardVector.signedAngle(d);
+	return AnglePlayer;
 }
 
-float D2Entity::DistFromPlayer() {
-	float dx = Position[0] - Player::localPlayer.position[0];
-	float dy = Position[1] - Player::localPlayer.position[1];
-	DistanceFromPlayer = calculateHpy(dx, dy);
+float D2entity::DistFromPlayer() {
+	DistanceFromPlayer = (Position - Player::localPlayer.position).magnitude();
 	return DistanceFromPlayer;
 }
 
-void D2Entity::GoTo(float x, float y) {
-	Position[0] = x;
-	Position[1] = y;
+void D2entity::GoTo(vector2 v) {
+	Position.Copy(v);
 }
 
-void D2Entity::Move(float x, float y) {
-	Position[0] += x;
-	Position[1] += y;
+void D2entity::Move(vector2 v) {
+	float dist = collisionRay.CalculateLineEquation(Position, v.normalize(), 2);
+	if ((dist) > 0.5f) {
+		Position += v * DeltaTime * 0.5f;
+	}
+
 }
 
-void D2Entity::Update(float deltaTime) {
-	AI -> Update(deltaTime * ID);
+void D2entity::DoCollision() {
+	for (auto it = GameManager::entityMap.begin(); it != GameManager::entityMap.end(); ++it) {
+		D2entity* entity = *it; // Dereference the iterator to get the entity pointer
+		if (entity != this) { // Check if the pointer is not null
+			vector2 dir = Position - entity->Position;
+			float dist = dir.sqrmagnitude();
+			if (dist < 0.15f) {
+				Move(dir.normalize() * DeltaTime * 10);
+			}
+		}
+	}
+
+	vector2 dir = Position - Player::localPlayer.position;
+	float dist = dir.sqrmagnitude();
+	if (dist < 0.15f) {
+		Move(dir.normalize() * (DeltaTime / dir.sqrmagnitude()));
+	}
+
+
+}
+
+void D2entity::Update(float deltaTime) {
+	DoCollision();
 	DistFromPlayer();
+	AngleToPlayer();
+
+
+	if (myMachine != NULL) {
+		//calculate health enum
+		float hpercent = Health / maxHealth;
+		myMachine->Health = 2;
+		if(hpercent < 0.8){ myMachine->Health = 1; }
+		if(hpercent < 0.4) { myMachine->Health = 0; }
+
+		//calculate distance enum
+		myMachine->Distance = 3;
+		if (DistanceFromPlayer < 1.5) { myMachine->Distance = 2; }
+		if (DistanceFromPlayer < 0.8) { myMachine->Distance = 1; }
+		if (DistanceFromPlayer < 0.2f){ myMachine->Distance = 0; }
+
+		myMachine->Visibility = 4;
+		myMachine->Magizine = 3;
+
+
+		float dist = collisionRay.CalculateLineEquation(Position, Player::localPlayer.position - Position, 10);
+		if (dist < DistanceFromPlayer) {
+			myMachine->Visibility = 4;
+		}
+		else {
+			myMachine->Visibility = 0;
+		}
+
+		//call the update
+		myMachine->Tick();
+
+	}
 }

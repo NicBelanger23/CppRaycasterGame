@@ -1,40 +1,82 @@
 #include "Player.h"
 #include <cmath>
 #include "NicRay.h"
+#include "PlayerWeapon.h"
 #include <iostream>
+
+PlayerWeapon shotgun = PlayerWeapon(0.2f, 1.0f, 15);
 Player Player::localPlayer;
+
 float deltaTime = 0.033f; 
 void Player::init() {
-	position[0] = 1.5f;
-	position[1] = 2.5f;
+	position.Copy(1.5f, 2.5f);
+	currentWeapon = &shotgun;
+}
+
+void Player::Reload() {
+	currentWeapon->BeginReload();
 }
 
 NicRay WalkingRay = NicRay();
-float travelrot;
+vector2 traveldir;
 
 void Player::Tick() {
-	rotation += rightAxis * deltaTime;
-	float x = cos(rotation);
-	float y = sin(rotation);
+	//dont to gameloop if dead
+	if (!Alive) { return; }
+	
+	//looking
+	rotation += lookAxis * deltaTime;
+	//moving
+	vector2 movement = vector2(cos(rotation), sin(rotation));
+	forwardVector.Copy(movement);
+	movement *= deltaTime * forwardAxis;
 
-	forwardVector[0] = x;
-	forwardVector[1] = y;
-
-	travelrot = rotation;
+	vector2 left = vector2(-sin(rotation), cos(rotation)) * deltaTime * rightAxis;
 
 	if(forwardAxis < 0.0f) {
 		
-		travelrot += 180.0f;
+		traveldir = forwardVector * -1;
+	}
+	else {
+		traveldir = forwardVector;
 	}
 
-	if (ValidateRays()) {
-		position[0] += forwardVector[0] * deltaTime * forwardAxis;
-		position[1] += forwardVector[1] * deltaTime * forwardAxis;
+	vector2 sumMove = movement + left;
+	vector2 xmov = vector2(sumMove.X, 0.0f);
+	vector2 ymov = vector2(-0.001f, sumMove.Y);
+
+	float d1 = WalkingRay.CalculateLineEquation(position, xmov, 4);
+	if (d1 < 0.2f) {
+		sumMove -= (xmov * 1);
+		if (d1 < 0.1f) {
+			sumMove -= (xmov * 0.2f);
+		}
+	}
+	float d2 = WalkingRay.CalculateLineEquation(position, ymov, 4);
+	if (d2 < 0.2f) {
+		sumMove -= (ymov * 1);
+		if (d2 < 0.1f) {
+			sumMove -= (ymov * 0.2f);
+		}
+
+	}
+	position += sumMove;
+
+	if (pressingTrigger) {
+		currentWeapon->TriggerDown();
 	}
 
+	currentWeapon->Tick();
 
 }
 
 bool Player::ValidateRays() {
-	return  WalkingRay.CalculateLineEquation(position, travelrot, 2) > 0.1f;
+	return  WalkingRay.CalculateLineEquation(position, traveldir, 2) > 0.1f;
+}
+
+void Player::Damage(float amount) {
+	Health -= amount;
+	if (Health <= 0) {
+		Alive = false;
+	}
 }

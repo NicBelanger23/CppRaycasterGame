@@ -5,6 +5,7 @@
 #include "RayRenderer.h"
 #include <iostream>
 #include <gl/GL.h>
+#include "./statemachine/statevals.h"
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -65,6 +66,15 @@ void processInput(GLFWwindow* window)
     }
 
     //looking
+    Player::localPlayer.lookAxis = 0;
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        Player::localPlayer.lookAxis += 1.0f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        Player::localPlayer.lookAxis -= 1.0f;
+    }
+
+    //strafing
     Player::localPlayer.rightAxis = 0;
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
         Player::localPlayer.rightAxis += 1.0f;
@@ -72,6 +82,13 @@ void processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
         Player::localPlayer.rightAxis -= 1.0f;
     }
+
+    //reloading
+    if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+        Player::localPlayer.Reload();
+    }
+
+    Player::localPlayer.pressingTrigger = glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

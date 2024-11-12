@@ -1,7 +1,7 @@
 #include "NicRay.h"
 #include "Map.h"
 #include <cmath>
-
+#include "vector2.h"
 using namespace std;
 
 float angle;
@@ -10,8 +10,6 @@ int maxDepthl;
 float Angle;
 float M;
 float B;
-float rayVector[3];
-
 
 float xhyp = 0;
 int xstep = 0;
@@ -25,36 +23,21 @@ float Foundy = 0.1f;
 float foundx;
 int materialx;
 
-
-float AdditionVector[3];
-void ComputeAdditionVector(float a[3], float b[3], int sign) {
-    AdditionVector[0] = a[0] + (b[0] * sign);
-    AdditionVector[1] = a[1] + (b[1] * sign);
-    AdditionVector[2] = a[2] + (b[2] * sign);
-}
-
-float VectorMagnitude(float a[3]) {
-
-    float step1 = pow(a[0], 2) + pow(a[1], 2) + pow(a[2], 2);
-    return sqrt(step1);
-}
-
-
-float NicRay::CalculateLineEquation(float playerPos[3], float myangle, int depth)
-{
-    materialx = 0;
-    materialy = 0;
-    maxDepthl = depth;
+float NicRay::CalculateLineEquation(vector2 start, float myangle, int depth) {
     angle = myangle;
 
     //create a unit vector in the direction of angle
     float x = cos(angle);
     float y = sin(angle);
-    rayVector[0] = x;
-    rayVector[1] = y;
-    rayVector[2] = 0;
+    return CalculateLineEquation(start, vector2(x, y), depth);
+}
 
-
+float NicRay::CalculateLineEquation(vector2 start, vector2 direction, int depth)
+{
+    materialx = 0;
+    materialy = 0;
+    maxDepthl = depth;
+    rayVector = direction;
     //x and y variables represent values for searching for x facing sides or y facing sides of boxes
     //-----------------------------------------------
 
@@ -72,8 +55,8 @@ float NicRay::CalculateLineEquation(float playerPos[3], float myangle, int depth
 
     //Y = MX + B
     //M = rise over run
-    M = rayVector[1] / rayVector[0];
-    B = playerPos[1] - M * playerPos[0];
+    M = rayVector.Y / rayVector.X;
+    B = start.Y - M * start.X;
 
     //shoot ray until max distance reached
     for (int i = 0; i < maxDepthl; i++)
@@ -82,14 +65,14 @@ float NicRay::CalculateLineEquation(float playerPos[3], float myangle, int depth
         if (Foundx == 0.1f)
         {
             if (xhyp <= yhyp) {
-                StepX(playerPos);
+                StepX(start);
             }
 
         }
         if (Foundy == 0.1f)
         {
             if (xhyp >= yhyp) {
-                SetpY(playerPos);
+                SetpY(start);
             }
 
         }
@@ -129,7 +112,7 @@ float NicRay::CalculateLineEquation(float playerPos[3], float myangle, int depth
 void NicRay::FaceX() {
     faceDirection = 4;
     foundMaterial = materialx;
-    if (rayVector[0] < 0)
+    if (rayVector.X < 0)
     {
         faceDirection = 1;
     }
@@ -138,19 +121,19 @@ void NicRay::FaceX() {
 void NicRay::FaceY() {
     faceDirection = 2;
     foundMaterial = materialy;
-    if (rayVector[1] < 0)
+    if (rayVector.Y < 0)
     {
         faceDirection = 3;
     }
 }
 
 //find intrsects on x axis gridlines
-void NicRay::StepX(float playerPos[3])
+void NicRay::StepX(vector2 playerPos)
 {
 
     int checkdir = 1; //are we going psitive of negitive
 
-    if (rayVector[0] < 0)
+    if (rayVector.X < 0)
     {
         checkdir = -1;
     }
@@ -161,13 +144,13 @@ void NicRay::StepX(float playerPos[3])
 
 
     //next x is x position plus steps, snapped to the grid (floored to int)
-    int nextx = floor(playerPos[0]) + xstep;
+    int nextx = floor(playerPos.X) + xstep;
 
     //find the height on our rays line equation
     foundy = M * nextx + B;
 
     //the point at the x,y when solved in the equation
-    float destPos[3] = { nextx, foundy, 0 };
+    vector2 destPos = vector2(nextx, foundy);
 
     //if going -ve, serch backwards or a grid collision
     int target = nextx;
@@ -177,8 +160,9 @@ void NicRay::StepX(float playerPos[3])
     }
 
     //mag is a^2 + b^2 == c^2
-    ComputeAdditionVector(destPos, playerPos, -1);
-    xhyp = VectorMagnitude(AdditionVector);
+
+    //ComputeAdditionVector(destPos, playerPos, -1);
+    xhyp = (destPos - playerPos).magnitude();//VectorMagnitude(AdditionVector);
     int gridy = floor(foundy);
 
     //make sure our position is valid before checking grid space  
@@ -195,7 +179,7 @@ void NicRay::StepX(float playerPos[3])
     }
 
     //if going -ve increment after calculations
-    if (rayVector[0] < 0)
+    if (rayVector.X < 0)
     {
         xstep += checkdir;
     }
@@ -204,12 +188,12 @@ void NicRay::StepX(float playerPos[3])
 }
 
 //find intrsects on y axis gridlines
-void NicRay::SetpY(float playerPos[3])
+void NicRay::SetpY(vector2 playerPos)
 {
 
     int checkdir = 1; //are we going psitive of negitive
 
-    if (rayVector[1] < 0)
+    if (rayVector.Y < 0)
     {
         checkdir = -1;
     }
@@ -219,13 +203,13 @@ void NicRay::SetpY(float playerPos[3])
     }
 
     //next y is y position plus steps, snapped to the grid (floored to int)
-    int nexty = floor(playerPos[1]) + ystep;
+    int nexty = floor(playerPos.Y) + ystep;
 
     //get x as a fucntion of y
     foundx = (nexty - B) / M;
 
     //where that puts us in world space
-    float destPos[3] = { foundx, nexty, 0};
+    vector2 destPos = vector2(foundx, nexty);
 
     int target = nexty;
     if (checkdir == -1)
@@ -234,8 +218,8 @@ void NicRay::SetpY(float playerPos[3])
     }
 
     //mag is a^2 + b^2 == c^2
-    ComputeAdditionVector(destPos, playerPos, -1);
-    yhyp = VectorMagnitude(AdditionVector);
+    //ComputeAdditionVector(destPos, playerPos, -1);
+    yhyp = (destPos - playerPos).magnitude();//VectorMagnitude(AdditionVector);
     int gridx = floor(foundx);
 
     //make sure our position is valid before checking grid space
@@ -253,7 +237,7 @@ void NicRay::SetpY(float playerPos[3])
     }
 
     //if going -ve increment after calculations
-    if (rayVector[1] < 0)
+    if (rayVector.Y < 0)
     {
         ystep += checkdir;
     }

@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Gameplay\Entities">
       <UniqueIdentifier>{951268cb-0fa0-4be8-9f7f-51bb0ce75ee1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Gameplay\Entities\StateMachine">
+      <UniqueIdentifier>{ad687484-b434-4d9f-b950-72126df75315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gameplay\Player">
+      <UniqueIdentifier>{ddf72553-5a63-40aa-8cc0-9ee21abaf09a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -48,14 +54,11 @@
     <ClInclude Include="textureshader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D2Entity.h">
+    <ClInclude Include="D2entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Source Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleAI.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
@@ -63,9 +66,54 @@
     <ClInclude Include="LinkedNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerWeapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\farDistShootState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\meleeState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\patrollState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\prefDistShootState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\soldier.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\state.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\stateExit.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\stateMachine.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\statevals.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\valCollection.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\retreatState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\healingState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="statemachine\reloadState.h">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D2Entity.cpp">
+    <ClCompile Include="D2entity.cpp">
       <Filter>Source Files\Gameplay\Entities</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
@@ -77,23 +125,62 @@
     <ClCompile Include="utils.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source Files\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="NicRay.cpp">
       <Filter>Source Files\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleAI.cpp">
-      <Filter>Source Files\Gameplay\Entities</Filter>
+    <ClCompile Include="statemachine\farDistShootState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\meleeState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\patrollState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\prefDistShootState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\soldier.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\state.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\stateExit.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\statevals.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\valCollection.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="vector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\healingState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\reloadState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="statemachine\retreatState.cpp">
+      <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Gameplay\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerWeapon.cpp">
+      <Filter>Source Files\Gameplay\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +200,12 @@
       <Filter>Source Files\Rendering\Shaders</Filter>
     </None>
     <None Include="reticlevertex.shader">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </None>
+    <None Include="healthbar.shader">
+      <Filter>Source Files\Rendering\Shaders</Filter>
+    </None>
+    <None Include="weapon.shader">
       <Filter>Source Files\Rendering\Shaders</Filter>
     </None>
   </ItemGroup>

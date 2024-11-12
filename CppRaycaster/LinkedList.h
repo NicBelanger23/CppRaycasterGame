@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "D2Entity.h"
+#include "D2entity.h"
 #include "LinkedNode.h"
 using namespace std;
 
@@ -17,7 +17,7 @@ public:
     LinkedList() : head(NULL) {}
 
     // Function to Insert a new node at a specific position in the list
-    void insertSorted(D2Entity* value) {
+    void insertSorted(D2entity* value) {
 
         // Initialize head if it's null
         if (!head) {
