@@ -212,6 +212,8 @@ void RayRenderer::DrawHud() {
         gunShader->setInt("State", 0);
     }
 
+    gunShader->setFloat("Bobbing", (cos(Player::localPlayer.bobbingTicks * 150) - 1)/50);
+
     float* gunverts = new float[12];
 
     gunverts[0] = -1.0f;

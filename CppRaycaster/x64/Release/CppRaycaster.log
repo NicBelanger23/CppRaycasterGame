@@ -1,13 +1,16 @@
-﻿  Player.cpp
+﻿  Map.cpp
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\vector2.h(51,13): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  (compiling source file 'Player.cpp')
+  (compiling source file 'Map.cpp')
   
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\PlayerWeapon.h(60,13): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  (compiling source file 'Player.cpp')
+  (compiling source file 'Map.cpp')
+  
+C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\statemachine\stateMachine.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'Map.cpp')
   
   Generating code
-  2 of 1364 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 1363 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    16 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   CppRaycaster.vcxproj -> C:\Users\nicol\source\repos\CppRaycaster\x64\Release\CppRaycaster.exe

@@ -21,10 +21,15 @@ class Player
 		void init();
 		//used for static refrences across the progeam
 		static Player localPlayer;
+
+		//interactions
 		void Damage(float amount);
 		float GetHealth() { return Health; };
 		void Reload();
 		PlayerWeapon* currentWeapon;
+
+		//for viewBobbing
+		float bobbingTicks;
 	private:
 		//for movement
 		bool ValidateRays();

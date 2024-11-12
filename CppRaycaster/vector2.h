@@ -60,9 +60,8 @@ public:
 	};
 
 	vector2 normalize() {
-		
+		if (X == 0.0f && Y == 0.0f) { return vector2::zero(); }
 		float m = magnitude();
-		if (m == 0) { return vector2::one(); }
 		return vector2(X / m, Y / m);
 	};
 

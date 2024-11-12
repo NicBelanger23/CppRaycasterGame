@@ -37,4 +37,14 @@
      m->Construct();
      d->myMachine = m;
 
+     d = new D2entity(3, vector2(7.8f, 4.5f));
+     m = new soldier(d);
+     m->Construct();
+     d->myMachine = m;
+
+     d = new D2entity(4, vector2(6.8f, 2.5f));
+     m = new soldier(d);
+     m->Construct();
+     d->myMachine = m;
+
  }

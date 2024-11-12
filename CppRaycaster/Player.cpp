@@ -11,6 +11,7 @@ float deltaTime = 0.033f;
 void Player::init() {
 	position.Copy(1.5f, 2.5f);
 	currentWeapon = &shotgun;
+	bobbingTicks = 0;
 }
 
 void Player::Reload() {
@@ -29,9 +30,9 @@ void Player::Tick() {
 	//moving
 	vector2 movement = vector2(cos(rotation), sin(rotation));
 	forwardVector.Copy(movement);
-	movement *= deltaTime * forwardAxis;
+	movement *= forwardAxis;
 
-	vector2 left = vector2(-sin(rotation), cos(rotation)) * deltaTime * rightAxis;
+	vector2 left = vector2(-sin(rotation), cos(rotation)) * rightAxis;
 
 	if(forwardAxis < 0.0f) {
 		
@@ -60,6 +61,7 @@ void Player::Tick() {
 		}
 
 	}
+	sumMove = sumMove.normalize() * deltaTime;
 	position += sumMove;
 
 	if (pressingTrigger) {
@@ -67,6 +69,8 @@ void Player::Tick() {
 	}
 
 	currentWeapon->Tick();
+
+	bobbingTicks += sumMove.sqrmagnitude() / (1 + abs(lookAxis / 2));
 
 }
 

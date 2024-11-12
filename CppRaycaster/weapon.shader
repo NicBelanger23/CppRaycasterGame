@@ -5,18 +5,18 @@ in vec2 TexCoord;
 
 uniform sampler2D textureSampler;
 uniform int State;
-
+uniform float Bobbing;
 void main()
 {
 	float s = 1.0 * State * 4.0/3.0; 
 	if(TexCoord.x < 0){discard;}
 
-	if(TexCoord.y > 0){discard;}
+	if(TexCoord.y > 0.25){discard;}
 
 	float x = 0.05 + ((TexCoord.x / 4) + s);
 	float y = (-TexCoord.y * 0.66) - 0.66;
 
-	vec2 pos = vec2(x, y);
+	vec2 pos = vec2(x, y + Bobbing);
 
 	vec4 c = texture(textureSampler, pos);
 	if(c.w < 0.5){discard;}
