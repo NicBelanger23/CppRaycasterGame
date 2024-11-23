@@ -54,7 +54,7 @@ void RayRenderer::Rays() {
 
 	for (float i = 0; i < Width; i++) {
 		float angle = (FOV / 2) - (i * FOV/Width);
-        float dist = ray.CalculateLineEquation(Player::localPlayer.position, Player::localPlayer.rotation + angle, 10);
+        float dist = ray.CalculateLineEquation(Player::localPlayer.position, Player::localPlayer.rotation + angle, 20);
         if (angle < 0) { angle += 2 * 3.14f; }
         if (angle > 2 * 3.14) { angle -= 2 * 3.14f; } 
         dist *= cos(angle);
@@ -134,7 +134,12 @@ void RayRenderer::DrawEntities() {
 
         characterShader->setFloat("AnglePlayer", a);
         characterShader->setFloat("DistPlayer", temp->data->DistanceFromPlayer);
-
+        if (temp->data->myWeapon) {
+            characterShader->setFloat("State", temp->data->myWeapon->drawFiring);
+        }
+        else {
+            characterShader->setFloat("State", 0);
+        }
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, verts, GL_STATIC_DRAW);
         glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -260,8 +265,8 @@ GLuint loadTexture(const char* filePath) {
     // Set texture wrapping and filtering options
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // Load and generate the texture
     int width, height, nrChannels;
@@ -314,9 +319,9 @@ void RayRenderer::Init() {
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
-    mapTextures = loadTexture((GetWD() + "\\textures\\MapAtlas.jpg").c_str());
+    mapTextures = loadTexture((GetWD() + "\\textures\\MapAtlas.png").c_str());
     reticleTexture = loadTexture((GetWD() + "\\textures\\croshair.png").c_str());
-    emenyTexture = loadTexture((GetWD() + "\\textures\\enemy.png").c_str());
+    emenyTexture = loadTexture((GetWD() + "\\textures\\EntityStates.png").c_str());
     gunTexture = loadTexture((GetWD() + "\\textures\\GunStates.png").c_str());
     //LoadTextures();
 

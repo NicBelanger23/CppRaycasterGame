@@ -1,6 +1,9 @@
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\D2entity.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\D2entity.obj
+C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\doorManager.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\doorManager.obj
+C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\EntityWeapon.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\EntityWeapon.obj
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\GameManager.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\GameManager.obj
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\glad.c;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\glad.obj
+C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\LevelProgresser.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\LevelProgresser.obj
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\Main.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\Main.obj
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\Map.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\Map.obj
 C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\NicRay.cpp;C:\Users\nicol\source\repos\CppRaycaster\CppRaycaster\x64\Release\NicRay.obj

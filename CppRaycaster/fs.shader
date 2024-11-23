@@ -23,17 +23,21 @@ void main()
 	float multiplier = floatArray.data[calcIndex] / 4;
 	float dist = floatArray.data[calcIndex + 1]; 
 
+	if(y > (1.0/dist)){discard;}
+
+	if(y < -(1.0/dist)){discard;}
 	//how far along the block is the collision
 	float collOff = floatArray.data[calcIndex + 2] / 2; 
-
-
+	if(collOff < 0) {collOff = 0;}
+	
 	//which position in texture atlas
-	float pos = floatArray.data[calcIndex + 3] / 2; 
+	double pos = floatArray.data[calcIndex + 3] / 2; 
 
 	//move to position in textureatlas
+	float offset = 0;
+	if(pos > 0.52){ offset += 0.5; multiplier = 1;}
 
 	//that last 0.9 fixes white lines on edge of blocks
-
-   	vec2 newv = vec2((collOff) + pos, 0.25-(y/4) * dist * 0.9);
+   	vec2 newv = vec2((collOff) + pos, (0.25-(y/4) * dist) + offset);
 	FragColor = texture(textureSampler, newv) * multiplier;
 }

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <gl/GL.h>
 #include "RayRenderer.h"
+#include "LevelProgresser.h"
 #include "D2entity.h"
 #include "Map.h"
 #include "./statemachine/soldier.h"
@@ -13,13 +14,15 @@
 
 #pragma once
 using namespace std;
+int GameManager::remainingEntities = 0;
+
 double GameManager::clockToMilliseconds(clock_t ticks) {
     // units/(units/time) => time (seconds) * 1000 = milliseconds
     return (ticks / (double)CLOCKS_PER_SEC);
 }
 
 std::set<D2entity*> GameManager::entityMap;
-
+LevelProgresser lp = LevelProgresser();
 GLFWwindow* window;
 
 //...
@@ -35,7 +38,7 @@ void GameManager::beginGame(GLFWwindow* win) {
     window = win;
     RayRenderer::Init();
 
-    Map::loadLevelOne();
+    lp.NextLevel(vector2::zero());
 
     Player p = Player();
     p.init();
@@ -52,17 +55,36 @@ float g_vertex_buffer_data[] = {
 
 
 void UpdateEntities(float deltaTime) {
+    GameManager::remainingEntities = 0;
     for (auto it = GameManager::entityMap.begin(); it != GameManager::entityMap.end(); ++it) {
         D2entity* entity = *it; // Dereference the iterator to get the entity pointer
         if (entity) { // Check if the pointer is not null
             entity->Update(deltaTime); // Call the function on each entity
+            GameManager::remainingEntities++;
         }
+    }
+}
+
+void HandelMouse(GLFWwindow* window) {
+    if (glfwGetWindowAttrib(window, GLFW_FOCUSED)) {
+        // The window is currently focused
+        
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+        double xpos, ypos;
+
+        glfwGetCursorPos(window, &xpos, &ypos);
+        glfwSetCursorPos(window, RayRenderer::Width / 2, RayRenderer::Height / 2);
+        Player::localPlayer.lookAxis -= (xpos - ((float)RayRenderer::Width / 2)) / 60;
+    }
+    else {
+        // The window is not focused
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 }
 
 
 //Called every Frame
-void GameManager::Update() {
+void GameManager::Update(GLFWwindow* window) {
 
 
     currentFrame = clock();
@@ -75,7 +97,9 @@ void GameManager::Update() {
     if (frametimeSec >= 0.015) {
         double FPS = frames / frametimeSec;
         cout << "Current FPS:" << FPS << endl;
+        HandelMouse(window);
         Player::localPlayer.Tick();
+        lp.Tick();
         frames = 0;
 
         RayRenderer::Rays();

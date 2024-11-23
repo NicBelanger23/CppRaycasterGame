@@ -6,6 +6,7 @@ using namespace std;
 void PlayerWeapon::TriggerDown() {
     if (currentAmmo < 1) { return; } // dont shoot if no ammo
     if (coolDownTicks > 0) { return; } //dont shoot too quickly
+    if (remainingTicks > 0) { return; } //dont shoot while reloading
     currentAmmo--;
 
     coolDownTicks = firingTicks;

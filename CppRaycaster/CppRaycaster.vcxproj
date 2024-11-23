@@ -140,7 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="D2entity.h" />
+    <ClInclude Include="doorManager.h" />
+    <ClInclude Include="EntityWeapon.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="LevelProgresser.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedNode.h" />
     <ClInclude Include="Main.h" />
@@ -168,8 +171,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2entity.cpp" />
+    <ClCompile Include="doorManager.cpp" />
+    <ClCompile Include="EntityWeapon.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="LevelProgresser.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="NicRay.cpp" />

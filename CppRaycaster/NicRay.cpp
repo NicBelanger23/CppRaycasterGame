@@ -166,15 +166,15 @@ void NicRay::StepX(vector2 playerPos)
     int gridy = floor(foundy);
 
     //make sure our position is valid before checking grid space  
-    bool withinYRange = gridy >= 0 && gridy < Map::Level1Size[0];
-    bool withinXDomain = target >= 0 && target < Map::Level1Size[0];
+    bool withinYRange = gridy >= 0 && gridy < Map::LevelSize.X;
+    bool withinXDomain = target >= 0 && target < Map::LevelSize.X;
     if (withinYRange && withinXDomain)
     {
         //if the tile is not empty (0), we hit it
-        if (Map::Level1[gridy][target] != 0)
+        if (Map::Level[gridy][target] != 0)
         {
             Foundx = target;
-            if (materialx == 0) { materialx = Map::Level1[gridy][target]; }
+            if (materialx == 0) { materialx = Map::Level[gridy][target]; }
         }
     }
 
@@ -206,7 +206,9 @@ void NicRay::SetpY(vector2 playerPos)
     int nexty = floor(playerPos.Y) + ystep;
 
     //get x as a fucntion of y
+    if (abs(M) <= 0.01) {yhyp = 999; return; }
     foundx = (nexty - B) / M;
+    
 
     //where that puts us in world space
     vector2 destPos = vector2(foundx, nexty);
@@ -223,15 +225,15 @@ void NicRay::SetpY(vector2 playerPos)
     int gridx = floor(foundx);
 
     //make sure our position is valid before checking grid space
-    bool withinXDomain = gridx >= 0 && gridx < Map::Level1Size[1];
-    bool withinYRange = target >= 0 && target < Map::Level1Size[0];
+    bool withinXDomain = gridx >= 0 && gridx < Map::LevelSize.Y;
+    bool withinYRange = target >= 0 && target < Map::LevelSize.X;
     if (withinXDomain && withinYRange)
     {
         //if the tile is not empty (0), we hit it
-        if (Map::Level1[target][gridx] != 0)
+        if (Map::Level[target][gridx] != 0)
         {
             Foundy = target;
-            if(materialy == 0){ materialy = Map::Level1[target][gridx]; }
+            if(materialy == 0){ materialy = Map::Level[target][gridx]; }
 
         }
     }

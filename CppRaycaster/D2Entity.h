@@ -2,6 +2,7 @@
 #include <iostream>
 #include "vector2.h"
 #include "Player.h"
+#include "EntityWeapon.h"
 #include "Map.h"
 #pragma once
 
@@ -25,7 +26,7 @@ private:
 		float Health = 0;
 		float maxHealth = 0;
 
-		void CalcVertices(float* list);
+		void CalcVertices(float* list); //create polygons for displaying entity
 
 		void GoTo(vector2 v);
 		void Move(vector2 v);
@@ -33,6 +34,8 @@ private:
 		void DoCollision();
 
 		stateMachine* myMachine;
+		EntityWeapon* myWeapon;
+
 		void Update(float deltaTime);
 		
 		D2entity(int id, vector2 position);
@@ -88,8 +91,11 @@ private:
 
 		}; 
 
-		void heal() { Health += 1.0; }; //walks in the directon of player
-		void fireWeapon() { Player::localPlayer.Damage(0.05f); }; //shots the weapon if able
+		void heal() { Health += 1.0; }; //gains health
+		
+		//shoots the weapon if able
+		void fireWeapon() { if (myWeapon) { myWeapon->triggerDown(); } };
+
 		void melee() { std::cout << "PUNCHING\n"; }; //punches if able
 		void lookRandom() { }; //looks twords random direction
 		void setHealth(float h) { maxHealth = h;  Health = h; };

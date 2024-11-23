@@ -13,13 +13,13 @@ layout(std430, binding = 1) buffer FloatArrayBuffer {
 
 uniform float AnglePlayer;
 uniform float DistPlayer;
-
+uniform float State;
 void main()
 {
 	float angle = AnglePlayer;
-	float x = (TexCoord.x + angle * 2) * DistPlayer;
+	float x = ((TexCoord.x + angle * 2) * DistPlayer)/2 - 0.25f + (State / 2);
 	float y = TexCoord.y * DistPlayer;
-
+	
 	int calcIndex = int((gl_FragCoord.x)) * 4;
 
 	//float multiplier = floatArray.data[calcIndex] / 4;
@@ -29,7 +29,7 @@ void main()
 	dist /= cos(angle);
 
 	//that last 0.9 fixes white lines on edge of blocks
-   	vec2 newv = vec2(x + 0.5, -y / 1.4 + 0.3);
+   	vec2 newv = vec2(x + 0.5, -y / 1.4 + 0.25);
 	 
 	if( dist > DistPlayer){
 		vec4 c = texture(textureSampler, newv);

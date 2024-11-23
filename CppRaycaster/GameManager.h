@@ -15,8 +15,9 @@ class GameManager
     friend class D2entity;
 
     public: void beginGame(GLFWwindow* win);
-            void Update();
+            void Update(GLFWwindow* window);
             static set<D2entity*> entityMap;
+            static int remainingEntities;
             
     private:
         double clockToMilliseconds(clock_t t);

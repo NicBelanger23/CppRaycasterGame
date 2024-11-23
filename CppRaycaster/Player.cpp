@@ -2,14 +2,16 @@
 #include <cmath>
 #include "NicRay.h"
 #include "PlayerWeapon.h"
+#include "Map.h"
 #include <iostream>
 
-PlayerWeapon shotgun = PlayerWeapon(0.2f, 1.0f, 15);
+PlayerWeapon shotgun = PlayerWeapon(0.2f, 1.0f, 24);
 Player Player::localPlayer;
 
 float deltaTime = 0.033f; 
 void Player::init() {
-	position.Copy(1.5f, 2.5f);
+	position.Copy(Map::PlayerStartPosition);
+	rotation = Map::PlayerStartRotation;
 	currentWeapon = &shotgun;
 	bobbingTicks = 0;
 }

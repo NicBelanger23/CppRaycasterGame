@@ -10,8 +10,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+unsigned int SCR_WIDTH = 800;
+unsigned int SCR_HEIGHT = 600;
 using namespace std;
 GameManager GameMan = GameManager();
 GLFWwindow* MainWindow;
@@ -29,7 +29,6 @@ int main()
 
     //initial GameCode
     glfwGetWindowSize(MainWindow, &RayRenderer::Width, &RayRenderer::Height);
-
     GameMan.beginGame(MainWindow);
 
     // render loop
@@ -38,7 +37,7 @@ int main()
         //handel input and do next uodate logic
         processInput(MainWindow);
 
-        GameMan.Update();
+        GameMan.Update(MainWindow);
 
 
 
@@ -88,11 +87,13 @@ void processInput(GLFWwindow* window)
         Player::localPlayer.Reload();
     }
 
-    Player::localPlayer.pressingTrigger = glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS;
+    Player::localPlayer.pressingTrigger = (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) || (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS);
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
+    SCR_WIDTH = width;
+    SCR_HEIGHT = height;
     RayRenderer::Width = width;
     RayRenderer::Height = height;
     glViewport(0, 0, width, height);

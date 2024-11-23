@@ -111,6 +111,15 @@
     <ClInclude Include="statemachine\reloadState.h">
       <Filter>Source Files\Gameplay\Entities\StateMachine</Filter>
     </ClInclude>
+    <ClInclude Include="EntityWeapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelProgresser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="doorManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D2entity.cpp">
@@ -181,6 +190,15 @@
     </ClCompile>
     <ClCompile Include="PlayerWeapon.cpp">
       <Filter>Source Files\Gameplay\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityWeapon.cpp">
+      <Filter>Source Files\Gameplay\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelProgresser.cpp">
+      <Filter>Source Files\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="doorManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

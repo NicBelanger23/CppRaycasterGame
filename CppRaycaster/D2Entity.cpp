@@ -7,6 +7,7 @@
 #include "GameManager.h"
 #include "vector2.h"
 #include "NicRay.h"
+#include "EntityWeapon.h"
 #include <iostream>
 #include <set>
 #include "./statemachine/stateMachine.h"
@@ -41,6 +42,8 @@ D2entity::D2entity(int id, vector2 position) {
 	Indicies[5] = 3;
 
 	AnglePlayer = 180;
+
+	myWeapon = new EntityWeapon();
 	GameManager::entityMap.insert(this);
 }
 
@@ -142,4 +145,6 @@ void D2entity::Update(float deltaTime) {
 		myMachine->Tick();
 
 	}
+
+	if (myWeapon) { myWeapon->Tick(); }
 }
