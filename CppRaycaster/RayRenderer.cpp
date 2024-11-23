@@ -28,7 +28,7 @@ GLuint emenyTexture;
 GLuint gunTexture;
 
 //verticies needed for 4k
-float RayRenderer::Vertices[15360];
+float RayRenderer::Vertices[12];
 float FaceInformation[15360];
 
 void RayRenderer::SendRayToGPU(int index, float posx, float dist) {
@@ -42,11 +42,6 @@ void RayRenderer::SendRayToGPU(int index, float posx, float dist) {
     FaceInformation[(index * 4) + 2] = colloffset;
     FaceInformation[(index * 4) + 3] = float(ray.foundMaterial) - 1;
 	index *= 4;
-	Vertices[index] = posx;
-	Vertices[index + 1] = -height;
-	Vertices[index + 2] = posx;
-	Vertices[index + 3] = height;
-
 }
 
 float FOV = 1;
@@ -60,6 +55,20 @@ void RayRenderer::Rays() {
         dist *= cos(angle);
 		SendRayToGPU(i, -1 + (i / Width) * 2, dist);
 	}
+
+    Vertices[0] = -1;
+    Vertices[1] = 1;
+    Vertices[2] = 1;
+    Vertices[3] = 1;
+    Vertices[4] = -1;
+    Vertices[5] = -1;
+    Vertices[6] = 1;
+    Vertices[7] = -1;
+    Vertices[8] = 1;
+    Vertices[9] = 1;
+    Vertices[10] = -1;
+    Vertices[11] = -1;
+
 }
 
 unsigned int shaderProgram;
@@ -80,8 +89,8 @@ void RayRenderer::DrawLines() {
     
     ourShader->use();
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * Width * 4, Vertices, GL_STATIC_DRAW);
-	glDrawArrays(GL_LINES, 0, Width * 2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, Vertices, GL_STATIC_DRAW);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);

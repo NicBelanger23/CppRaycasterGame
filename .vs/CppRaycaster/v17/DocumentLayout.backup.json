@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\doorManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -43,10 +47,6 @@
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\LevelProgresser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\GameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -62,11 +62,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "EntityWeapon.h",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\EntityWeapon.h",
               "RelativeDocumentMoniker": "CppRaycaster\\EntityWeapon.h",
@@ -78,7 +78,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "doorManager.h",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\doorManager.h",
               "RelativeDocumentMoniker": "CppRaycaster\\doorManager.h",
@@ -91,32 +91,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "fs.shader",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader",
               "RelativeDocumentMoniker": "CppRaycaster\\fs.shader",
               "ToolTip": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader",
               "RelativeToolTip": "CppRaycaster\\fs.shader",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAACYAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
               "WhenOpened": "2024-11-23T01:49:38.292Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "RayRenderer.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\RayRenderer.cpp",
               "ToolTip": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp",
               "RelativeToolTip": "CppRaycaster\\RayRenderer.cpp",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHQAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAD4AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-23T01:48:46.362Z"
+              "WhenOpened": "2024-11-23T01:48:46.362Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "LevelProgresser.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\LevelProgresser.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\LevelProgresser.cpp",
@@ -152,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "GameManager.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\GameManager.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\GameManager.cpp",
@@ -164,7 +165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Player.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\Player.cpp",
@@ -176,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "charactershader.shader",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\charactershader.shader",
               "RelativeDocumentMoniker": "CppRaycaster\\charactershader.shader",
@@ -188,20 +189,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Map.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\Map.cpp",
               "ToolTip": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp",
               "RelativeToolTip": "CppRaycaster\\Map.cpp",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAAAJEAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAANMAAAAAAAAAAAAAANwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-07T15:48:44.77Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Map.h",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.h",
               "RelativeDocumentMoniker": "CppRaycaster\\Map.h",
@@ -213,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Main.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\Main.cpp",

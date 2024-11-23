@@ -25,7 +25,7 @@ void main()
 
 	if(y > (1.0/dist)){discard;}
 
-	if(y < -(1.0/dist)){discard;}
+	if(y < -(1.0/dist)){FragColor = vec4(0.2, 0.2, 0.2, 1); return;}
 	//how far along the block is the collision
 	float collOff = floatArray.data[calcIndex + 2] / 2; 
 	if(collOff < 0) {collOff = 0;}
