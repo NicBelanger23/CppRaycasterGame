@@ -41,7 +41,7 @@ public:
 		//actually fire
 		drawFiringTicks = drawFiringTime;
 		roundTicks = roundTime;
-		Player::localPlayer.Damage(0.05f);
+		Player::localPlayer.Damage(1.0f);
 	}
 
 	void Tick() {
@@ -55,10 +55,6 @@ public:
 			drawFiringTicks = 0;
 			roundTicks = 0;
 		}
-	}
-
-	void fire() {
-
 	}
 };
 

@@ -5,14 +5,15 @@
 #include "Map.h"
 #include <iostream>
 
-PlayerWeapon shotgun = PlayerWeapon(0.2f, 1.0f, 24);
+PlayerWeapon rifle = PlayerWeapon(0.2f, 1.0f, 24);
 Player Player::localPlayer;
+int regenTicks;
 
 float deltaTime = 0.033f; 
 void Player::init() {
 	position.Copy(Map::PlayerStartPosition);
 	rotation = Map::PlayerStartRotation;
-	currentWeapon = &shotgun;
+	currentWeapon = &rifle;
 	bobbingTicks = 0;
 }
 
@@ -74,6 +75,12 @@ void Player::Tick() {
 
 	bobbingTicks += sumMove.sqrmagnitude() / (1 + abs(lookAxis / 2));
 
+	if (regenTicks <= 0) {
+		Health += 0.5f;
+		if (Health > 100) { Health = 100; }
+		regenTicks = 0;
+	}
+	regenTicks--;
 }
 
 bool Player::ValidateRays() {
@@ -81,6 +88,7 @@ bool Player::ValidateRays() {
 }
 
 void Player::Damage(float amount) {
+	regenTicks = 400;
 	Health -= amount;
 	if (Health <= 0) {
 		Alive = false;

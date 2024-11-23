@@ -11,6 +11,7 @@ public:
 	static vector2* patrollrout;
 	static int numPatrolls;
 
+	static void unloadLevel();
 	static void loadLevelOne();
 	static void loadLevelTwo(vector2 offset);
 	static void loadLevelThree(vector2 offset);
