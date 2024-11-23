@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\doorManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\doorManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -39,10 +43,6 @@
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\LevelProgresser.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -66,7 +66,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "EntityWeapon.h",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\EntityWeapon.h",
               "RelativeDocumentMoniker": "CppRaycaster\\EntityWeapon.h",
@@ -74,12 +74,11 @@
               "RelativeToolTip": "CppRaycaster\\EntityWeapon.h",
               "ViewState": "AgIAACEAAAAAAAAAAAAAACsAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-23T06:12:09.347Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T06:12:09.347Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "doorManager.h",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\doorManager.h",
               "RelativeDocumentMoniker": "CppRaycaster\\doorManager.h",
@@ -92,13 +91,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
               "Title": "fs.shader",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader",
               "RelativeDocumentMoniker": "CppRaycaster\\fs.shader",
               "ToolTip": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader",
               "RelativeToolTip": "CppRaycaster\\fs.shader",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACYAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
               "WhenOpened": "2024-11-23T01:49:38.292Z",
               "EditorCaption": ""
@@ -113,12 +112,11 @@
               "RelativeToolTip": "CppRaycaster\\RayRenderer.cpp",
               "ViewState": "AgIAAGwAAAAAAAAAAAAAAHQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-23T01:48:46.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T01:48:46.362Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "LevelProgresser.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\LevelProgresser.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\LevelProgresser.cpp",
@@ -126,8 +124,7 @@
               "RelativeToolTip": "CppRaycaster\\LevelProgresser.cpp",
               "ViewState": "AgIAAAEAAAAAAAAAAAAtwAwAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-14T00:56:15.876Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T00:56:15.876Z"
             },
             {
               "$type": "Document",
@@ -139,8 +136,7 @@
               "RelativeToolTip": "CppRaycaster\\LevelProgresser.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-14T00:55:05.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T00:55:05.367Z"
             },
             {
               "$type": "Document",
@@ -152,12 +148,11 @@
               "RelativeToolTip": "CppRaycaster\\GameManager.h",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-14T00:32:52.078Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T00:32:52.078Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "GameManager.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\GameManager.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\GameManager.cpp",
@@ -165,12 +160,11 @@
               "RelativeToolTip": "CppRaycaster\\GameManager.cpp",
               "ViewState": "AgIAAAoAAAAAAAAAAAAjwBkAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-14T00:29:51.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T00:29:51.88Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Player.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\Player.cpp",
@@ -178,12 +172,11 @@
               "RelativeToolTip": "CppRaycaster\\Player.cpp",
               "ViewState": "AgIAAFQAAAAAAAAAAAAAAFoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-14T00:08:06.578Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T00:08:06.578Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "charactershader.shader",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\charactershader.shader",
               "RelativeDocumentMoniker": "CppRaycaster\\charactershader.shader",
@@ -191,8 +184,7 @@
               "RelativeToolTip": "CppRaycaster\\charactershader.shader",
               "ViewState": "AgIAABAAAAAAAAAAAAAwwB8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
-              "WhenOpened": "2024-11-13T23:47:49.086Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T23:47:49.086Z"
             },
             {
               "$type": "Document",
@@ -202,14 +194,14 @@
               "RelativeDocumentMoniker": "CppRaycaster\\Map.cpp",
               "ToolTip": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp",
               "RelativeToolTip": "CppRaycaster\\Map.cpp",
-              "ViewState": "AgIAAPwAAAAAAAAAAAAAAAUBAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAAAJEAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-07T15:48:44.77Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Map.h",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.h",
               "RelativeDocumentMoniker": "CppRaycaster\\Map.h",
@@ -217,12 +209,11 @@
               "RelativeToolTip": "CppRaycaster\\Map.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-07T15:46:07.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-07T15:46:07.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Main.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\Main.cpp",
@@ -230,8 +221,7 @@
               "RelativeToolTip": "CppRaycaster\\Main.cpp",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAAFcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-04T20:21:56.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-04T20:21:56.929Z"
             }
           ]
         }

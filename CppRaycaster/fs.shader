@@ -35,7 +35,11 @@ void main()
 
 	//move to position in textureatlas
 	float offset = 0;
-	if(pos > 0.52){ offset += 0.5; multiplier = 1;}
+	if(pos > 0.52){ offset += 0.5; 
+		float distcent = 1 - abs(0.5-(collOff * 2));
+		if(distcent > multiplier)
+		multiplier = distcent;
+		}
 
 	//that last 0.9 fixes white lines on edge of blocks
    	vec2 newv = vec2((collOff) + pos, (0.25-(y/4) * dist) + offset);
