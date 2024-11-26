@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\fs.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\RayRenderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|solutionrelative:CppRaycaster\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{546B578C-CE81-4E99-9C43-ED18F81A2A84}|CppRaycaster\\CppRaycaster.vcxproj|C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\doorManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -62,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
@@ -86,12 +86,11 @@
               "RelativeToolTip": "CppRaycaster\\doorManager.h",
               "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-11-23T02:40:05.017Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T02:40:05.017Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "fs.shader",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\fs.shader",
               "RelativeDocumentMoniker": "CppRaycaster\\fs.shader",
@@ -104,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "RayRenderer.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\RayRenderer.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\RayRenderer.cpp",
@@ -112,8 +111,7 @@
               "RelativeToolTip": "CppRaycaster\\RayRenderer.cpp",
               "ViewState": "AgIAACQAAAAAAAAAAAAAAD4AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-11-23T01:48:46.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T01:48:46.362Z"
             },
             {
               "$type": "Document",
@@ -189,13 +187,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Map.cpp",
               "DocumentMoniker": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp",
               "RelativeDocumentMoniker": "CppRaycaster\\Map.cpp",
               "ToolTip": "C:\\Users\\nicol\\source\\repos\\CppRaycaster\\CppRaycaster\\Map.cpp",
               "RelativeToolTip": "CppRaycaster\\Map.cpp",
-              "ViewState": "AgIAANMAAAAAAAAAAAAAANwAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAUwAIBAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-07T15:48:44.77Z",
               "EditorCaption": ""

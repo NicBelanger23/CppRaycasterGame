@@ -44,7 +44,7 @@
      
      //setup level progressor
      LevelProgresser::destination = vector2(6.5, 16.5);
-     LevelProgresser::DM = doorManager(vector2(6, 14), 50, 1.5f);
+     LevelProgresser::DM = doorManager(vector2(6, 14), 5, 1.5f);
 
      int loadedMap[20][20] = {
      {0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9},
@@ -132,7 +132,7 @@
 
      //setup level progressor
      LevelProgresser::destination = vector2(4.5, 5.5);
-     LevelProgresser::DM = doorManager(vector2(3, 7), 5, 2.0f);
+     LevelProgresser::DM = doorManager(vector2(3, 7), 1, 2.0f);
 
      int loadedMap[20][20] = {
      {0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9},
@@ -256,10 +256,12 @@
      }
      //spawn entities
      {
-         int vsize = 2;
-         vector2 vecs[2] = {
+         int vsize = 4;
+         vector2 vecs[4] = {
              vector2(16.6f, 6.0f),
+             vector2(16.6f, 7.0f),
              vector2(10.0f, 6.0f),
+             vector2(10.0f, 7.0f)
          };
 
 
